@@ -1,6 +1,6 @@
 # ICU Mortality Prediction
 ## 설명
-MIMIC-III의 ICUSTAYS, CHARTEVENTS, ADMISSIONS 데이터를 바탕으로 Intensive Care Unit (ICU) 치료 중 사망 환자를 예측합니다.
+[MIMIC-III](https://mimic.mit.edu/docs/iii/)의 ICUSTAYS, CHARTEVENTS, ADMISSIONS 데이터를 바탕으로 Intensive Care Unit (ICU) 치료 중 사망 환자를 예측합니다.
 ICU에 1 ~ 2일 사이의 기간동안(min_los: 1, max_los: 2) 입원한 환자의 처음 3시간 데이터만 가지고 사망을 예측합니다.
 CHARTEVENTS에 기록된 ICU에 입원동안 발생한 이벤트(e.g. 약물 투여, heart rate 측정 등)를 바탕으로 feature를 구성하고 GRU 모델을 이용해 사망을 예측합니다.
 이때 CHARTEVENTS의 이벤트 종류를 나타내는 ITEMID, 각 ITEMID에 해당하는 수치인 VALUENUM을 이용합니다.
