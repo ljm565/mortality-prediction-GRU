@@ -1,0 +1,27 @@
+{   
+    "base_path": "./",
+    "model_name": "mortality_pred",
+    "loss_data_name": "mortality_pred",
+
+
+    "baseInfo_dim": 100,
+    "model_hidden_dim": 512,
+    "num_layers": 3,
+    "dropout": 0.2,
+
+
+    "batch_size": 128,
+    "epochs": 100,
+    "lr": 0.0001,
+
+
+    "early_stop_criterion": 5,
+
+
+    "min_los": 1,
+    "max_los": 2,
+    "max_chartevent_time": 3,
+    "max_seq": 50,
+    "itemid_topk": 500,
+    "diag_topk": 300
+}
