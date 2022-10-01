@@ -6,7 +6,7 @@ CHARTEVENTS에 기록된 ICU에 입원동안 발생한 이벤트(e.g. 약물 투
 이때 CHARTEVENTS의 이벤트 종류를 나타내는 ITEMID, 각 ITEMID에 해당하는 수치인 VALUENUM을 이용합니다.
 추가로 예측 대상이 되는 환자별로 ADMISSIONS에 있는 ETHNICITY (인종), ADMISSION_TYPE (내원 타입), DIAGNOSIS (진단) 특징을 사용합니다.
 본 실험에서 사용한 데이터는 민감한 의료 데이터이기 때문에 접근 권한이 없으면 데이터를 볼 수 없습니다.
-따라서 실험에 사용한 데이터를 공개하지 않겠습니다.
+따라서 실험에 사용한 데이터를 공개하지 않겠습니다. 그리고 본 프로젝트에 대한 자세한 설명은 [GRU를 이용한 Mortality Prediction](https://ljm565.github.io/contents/mortality-prediction1.html)을 참고하시기 바랍니다.
 <br><br><br>
 
 ## 모델 종류
