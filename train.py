@@ -172,10 +172,11 @@ class Trainer:
     def test(self):        
         # statistics of the test set
         phase = 'test'
+        total_y, total_output = [], []
         with torch.no_grad():
             self.model.eval()
-            total_loss, acc = 0, 0
-            for idx, (baseInfo, charteventInfo, y) in enumerate(self.dataloaders[phase]):
+            total_loss, total_acc = 0, 0
+            for baseInfo, charteventInfo, y in self.dataloaders[phase]:
                 batch_size = baseInfo.size(0)
                 baseInfo, charteventInfo, y = baseInfo.to(self.device), charteventInfo.to(self.device), y.to(self.device)
                 output = self.model(baseInfo, charteventInfo)
@@ -183,29 +184,17 @@ class Trainer:
 
                 total_loss += loss.item()*batch_size
                 predict = (output > 0.5).float()
-                acc += (predict==y).float().sum().item()
+                total_acc += (predict==y).float().sum().item()
 
-                if idx == 0:
-                    pred_np_train = predict.detach().cpu().numpy()
-                    y_np = y.detach().cpu().numpy()
-                    output_np = output.detach().cpu().numpy()
-                else:
-                    pred_new = predict.detach().cpu().numpy()
-                    pred_np_train = np.concatenate((pred_np_train, pred_new), axis=0)
-                    y_new = y.detach().cpu().numpy()
-                    y_np = np.concatenate((y_np, y_new), axis=0)
-                    output_new = output.detach().cpu().numpy()
-                    output_np = np.concatenate((output_np, output_new), axis=0)
+                total_y.append(y.detach().cpu())
+                total_output.append(output.detach().cpu())
+            
+            total_y = torch.cat(total_y, dim=0).numpy()
+            total_output = torch.cat(total_output, dim=0).numpy()
 
             total_loss = total_loss / len(self.dataloaders[phase].dataset)
-            epoch_acc = acc/len(self.dataloaders[phase].dataset)
-            print('test loss: {:4f}, test acc: {}'.format(total_loss, epoch_acc))
+            total_acc = total_acc/len(self.dataloaders[phase].dataset)
+            print('test loss: {:4f}, test acc: {}'.format(total_loss, total_acc))
 
-            print('AUROC of test data: ', roc_auc_score(y_np, output_np))
-            print('AUPRC of test data: ', average_precision_score(y_np, output_np))
-
-
-           
-
-
-            
+            print('AUROC of test data: ', roc_auc_score(total_y, total_output))
+            print('AUPRC of test data: ', average_precision_score(total_y, total_output))
