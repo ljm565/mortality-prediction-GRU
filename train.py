@@ -164,7 +164,7 @@ class Trainer:
             if early_stop == self.config.early_stop_criterion:
                 break
 
-        print('best val acc: {:4f}, best epoch: {:d}\n'.format(best_acc, best_epoch))
+        print('best test acc: {:4f}, best epoch: {:d}\n'.format(best_acc, best_epoch))
         self.loss_data = {'best_epoch': best_epoch, 'best_acc': best_acc, 'train_loss_history': train_loss_history, 'val_loss_history': val_loss_history}
         return self.loss_data
     
